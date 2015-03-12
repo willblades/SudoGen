@@ -2,18 +2,23 @@
 Sudoku Generator &amp; Solver written in C++.  
 
 To-Do list:
-Implement a way to guarantee solvable problem
+-----------
 
-GUI: Implement Qt-based GUI
 
-Alternative Problem solving techniques, heuristic and otherwise
+- Implement a way to guarantee solvable problem
 
-User Interface & Input handling
+- GUI: Implement Qt-based GUI
 
-Time tracking 
+- Alternative Problem solving techniques, heuristic and otherwise
 
-Background music
+- User Interface & Input handling
 
+- Time tracking 
+
+- Background music
+
+Version History: 
+----------------
 
 March 12 2015
 - Initial version, generates a puzzle and partially solves it 
