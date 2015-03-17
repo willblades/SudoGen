@@ -1,16 +1,19 @@
-#include <iostream>
-#include <math.h>
-#include <vector>
-#include "Board.h"
-using namespace std;
+//======================================================================
+// main.cpp
+// Author: Will Blades
+// The main function of the program. This is where the Qt Application is
+// called & run
+//======================================================================
 
-int main()
+#include "mainwindow.h"
+#include "board.h"
+#include <QApplication>
+
+int main(int argc, char *argv[])
 {
-	Board mainBoard;
-	mainBoard.Initialize();
-	mainBoard.GeneratePuzzle();
-	mainBoard.DisplayInConsole();
-	mainBoard.SolveGeneratedPuzzle();
-	mainBoard.DisplayInConsole();
-	return 0;
+    QApplication a(argc, argv);
+    MainWindow w;
+    w.show();
+
+    return a.exec();
 }
