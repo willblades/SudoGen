@@ -7,7 +7,6 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QMainWindow>
 #include "board.h"
 
 namespace Ui {

@@ -11,6 +11,7 @@
 #include <QtGui>
 #include <QMessageBox>
 
+
 // Default constructor
 // Allocates signal handling for some of the menu actions and calls the 
 // initialization function InitiateWindow
@@ -19,6 +20,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
     connect(ui->actionExit, SIGNAL(triggered()), this, SLOT(close()));
     connect(ui->actionNew_Game, SIGNAL(triggered()), this, SLOT(NewGame()));
     connect(ui->actionAbout, SIGNAL(triggered()), this, SLOT(About()));
@@ -41,8 +43,8 @@ void MainWindow::About()
 {
     QMessageBox msgBox;
     msgBox.setWindowTitle("About");
-    msgBox.setText("SuDoGen v0.1 \nA simple sudoku generator \nAuthor: "
-                   "Will Blades \nBuild: Mar 16 2014");
+    msgBox.setText("SuDoGen v0.1c \nA simple sudoku generator \nAuthor: "
+                   "Will Blades \nBuild: Mar 18 2014");
     msgBox.setStandardButtons(QMessageBox::Ok);
     msgBox.exec();
 }
@@ -74,6 +76,7 @@ void MainWindow::InitiateWindow()
             button->setStyleSheet("background-color: white");
         if (puzzle[x][y] != -1)
             button->setText(QString::number(puzzle[x][y]));
+
         counter++,y++;colorcount++;
         if (counter == board->getBoardlength())
         {
@@ -89,10 +92,13 @@ void MainWindow::InitiateWindow()
 void MainWindow::DestroyWindow()
 {
     QString emptycell = " ";
-    board->~Board();
+    delete board;
     QList<QPushButton*> allbuttons = this->findChildren<QPushButton*>();
     foreach (QPushButton* button, allbuttons)
+    {
         button->setText(emptycell);
+        button->repaint();
+    }
 }
 
 // default destructor 
