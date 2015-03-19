@@ -8,6 +8,11 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QSignalMapper>
+#include <QtCore>
+#include <QtGui>
+#include <QInputDialog>
+#include <QMessageBox>
 #include "board.h"
 
 namespace Ui {
@@ -27,10 +32,12 @@ private slots:
     void About();
     void NewGame();
     void DestroyWindow();
-
+    void On_Clicked(int location);
 private:
     Ui::MainWindow *ui;
     Board* board;
+    QSignalMapper *signalMapper;
+    QList<QPushButton*> allbuttons;
 };
 
 #endif // MAINWINDOW_H

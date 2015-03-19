@@ -103,8 +103,9 @@ void Board::Initialize()
     }
 
     // swap rows
-    swap_repeatitions = distribution(generator);
-    for (int i = 0; i < swap_repeatitions; i++)
+    std::uniform_int_distribution<int> distribution2(1, 50);
+    int row_repeatitions = distribution2(generator);
+    for (int i = 0; i < row_repeatitions; i++)
     {
         for (int j = 0; j < board_length ; j += 3)
         {
@@ -118,19 +119,6 @@ void Board::Initialize()
                 board[k][j + row1] = board[k][j + row2];
                 board[k][j + row2] = swap_temp;
             }
-        }
-    }
-
-    //swap columns again
-    swap_repeatitions = distribution(generator);
-    for (int i = 0; i < swap_repeatitions; i++)
-    {
-        for (int j = 0; j < board_length; j += 3)
-        {
-            std::uniform_int_distribution<int> random(0, 2);
-            int column1 = random(generator);
-            int column2 = random(generator);
-            std::swap(board[j + column1], board[j + column2]);
         }
     }
 }

@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>SuDoGen</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QPushButton" name="pushButton_1">
@@ -1808,9 +1808,10 @@
    </property>
    <widget class="QMenu" name="menuSudokuGen">
     <property name="title">
-     <string>SudokuGen</string>
+     <string>Game</string>
     </property>
     <addaction name="actionNew_Game"/>
+    <addaction name="actionSolve_it"/>
     <addaction name="actionExit"/>
    </widget>
    <widget class="QMenu" name="menuOptions">
@@ -1856,6 +1857,11 @@
   <action name="actionAbout">
    <property name="text">
     <string>About</string>
+   </property>
+  </action>
+  <action name="actionSolve_it">
+   <property name="text">
+    <string>Solve it!</string>
    </property>
   </action>
  </widget>

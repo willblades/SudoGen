@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -20,3 +20,6 @@ HEADERS  += mainwindow.h \
     board.h
 
 FORMS    += mainwindow.ui
+
+win32:RC_FILE = MyApp.rc
+
