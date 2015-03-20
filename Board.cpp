@@ -5,11 +5,7 @@
 //======================================================================
 
 #include "Board.h"
-#include <random>
-#include <iostream>
-#include <algorithm>
-#include <chrono>
-#include <set>
+
 
 // Default constructor, a typical sudoku puzzle (9x9) and an easy
 // difficulty setting is assumed by default 
@@ -71,6 +67,12 @@ Board::~Board()
     emptyspaces.clear();
 }
 
+int RandomInt(int low, int high)
+{
+// Random number between low and high
+return qrand() % ((high + 1) - low) + low;
+}
+
 // Generate a sudoku puzzle by randomly swapping rows and columns
 // of a valid solved sudoku puzzle through randomly generated 
 // numbers of repetitions. 
@@ -86,32 +88,32 @@ void Board::Initialize()
     board[7] = { 6, 7, 8, 9, 1, 2, 3, 4, 5 };
     board[8] = { 9, 1, 2, 3, 4, 5, 6, 7, 8 };
 
-    std::default_random_engine generator;
-    std::uniform_int_distribution<int> distribution(1, 50);
-    int swap_repeatitions = distribution(generator);
+    //std::default_random_engine generator;
+    //std::uniform_int_distribution<int> distribution(1, std::nextafter(50,INT_MAX));
+    int swap_repeatitions = RandomInt(1,50);//distribution(generator);
 
     //swap columns
     for (int i = 0; i < swap_repeatitions; i++)
     {
         for (int j = 0; j < board_length ; j += 3)
         {
-            std::uniform_int_distribution<int> random(0, 2);
-            int column1 = random(generator);
-            int column2 = random(generator);
+            //std::uniform_int_distribution<int> random(0, std::nextafter(2,INT_MAX));
+            int column1 = RandomInt(0,2);//random(generator);
+            int column2 = RandomInt(0,2);//random(generator);
             std::swap(board[j + column1], board[j + column2]);
         }
     }
 
     // swap rows
-    std::uniform_int_distribution<int> distribution2(1, 50);
-    int row_repeatitions = distribution2(generator);
+    //std::uniform_int_distribution<int> distribution2(1, std::nextafter(50,INT_MAX));
+    int row_repeatitions = RandomInt(1,50); //distribution2(generator);
     for (int i = 0; i < row_repeatitions; i++)
     {
         for (int j = 0; j < board_length ; j += 3)
         {
-            std::uniform_int_distribution<int> random(0, 2);
-            int row1 = random(generator);
-            int row2 = random(generator);
+            //std::uniform_int_distribution<int> random(0, std::nextafter(2,INT_MAX));
+            int row1 = RandomInt(0,2);//random(generator);
+            int row2 = RandomInt(0,2);//random(generator);
 
             for (int k = 0; k < board_length; k++)
             {
@@ -131,23 +133,23 @@ void Board::Initialize()
 // to be removed from the grid. 
 void Board::GeneratePuzzle()
 {
-    std::default_random_engine generator;
+    //std::default_random_engine generator;
     int emptycells;
 
     if (difficulty_settings == easy)
     {
-        std::uniform_int_distribution<int> distribution1(46, 50);
-        emptycells = distribution1(generator);
+        //std::uniform_int_distribution<int> distribution1(46, 50);
+        emptycells = RandomInt(46,50);//distribution1(generator);
     }
     else if (difficulty_settings == moderate)
     {
-        std::uniform_int_distribution<int> distribution2(51, 57);
-        emptycells = distribution2(generator);
+        //std::uniform_int_distribution<int> distribution2(51, 57);
+        emptycells = RandomInt(51,57);//distribution2(generator);
     }
     else
     {
-        std::uniform_int_distribution<int> distribution3(58, 65);
-        emptycells = distribution3(generator);
+        //std::uniform_int_distribution<int> distribution3(58, 65);
+        emptycells = RandomInt(58,65);//distribution3(generator);
     }
 
     solution = board;
@@ -159,10 +161,10 @@ void Board::GeneratePuzzle()
         isempty = true;
         while (isempty)
         {
-            std::uniform_int_distribution<int> distribution(0, board_length - 1);
-            location1 = distribution(generator);
-            std::uniform_int_distribution<int> distribution2(0, board_length - 1);
-            location2 = distribution2(generator);
+            //std::uniform_int_distribution<int> distribution(0, board_length - 1);
+            location1 = RandomInt(0, board_length - 1);//distribution(generator);
+            //std::uniform_int_distribution<int> distribution2(0, board_length - 1);
+            location2 = RandomInt(0, board_length - 1);//distribution2(generator);
             if (board[location1][location2] != -1)
             {
                 emptyspaces.insert(std::make_pair(location1, location2));
@@ -193,61 +195,6 @@ void searchRowsandCols(std::vector<int>& searchzone,
         possible_locations.erase(colrownumber);
 }
 
-// Deprecated Initialization function. Attempts to create a valid sudoku 
-// puzzle from scratch. Kept for possible future recycling/re-use
-void Board::InitiateRandomFromScratch()
-{
-    std::set<int> allocated_locations;
-    std::vector<int> location_row, location_column, all_possible_locations;
-
-    for (int x = 0; x < board_length; x++)
-    {
-        int current_number = possible_numbers.at(x);
-        for (int y = 0; y < board_length; y++)
-        {
-            DisplayInConsole();
-
-            int random_location = 0;
-            bool empty_location_found = false;
-            for (int i = 0; i < board_length; i++)
-                all_possible_locations.push_back(i);
-            unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
-            std::shuffle(all_possible_locations.begin(), all_possible_locations.end(),
-                std::default_random_engine(seed));
-
-            while (!empty_location_found)
-            {
-                random_location = all_possible_locations.at(0);
-
-                for (int i = 0; i < board_length; i++)
-                {
-                    location_column.push_back(board[i][random_location]);
-                    location_row.push_back(board[y][i]);
-                }
-
-
-                if ( //(allocated_locations.find(random_location) == allocated_locations.end()) &&
-                    board[y][random_location] == -1 &&
-                    NoDuplicatesFound(location_column,current_number) &&
-                    NoDuplicatesFound(location_row,current_number) )
-                {
-                    board[y][random_location] = current_number;
-                    allocated_locations.insert(random_location);
-                    empty_location_found = true;
-                }
-                all_possible_locations.erase(all_possible_locations.begin());
-                location_column.clear(), location_row.clear();
-                //int search_result = std::distance(all_possible_locations.begin(),
-                    //std::find(all_possible_locations.begin(),
-                //all_possible_locations.end(), random_location));
-                //all_possible_locations.erase(all_possible_locations.begin()
-                //+ search_result);
-            }
-            all_possible_locations.clear();
-        }
-        allocated_locations.clear();
-    } 
-}
 
 // Displays the current Sudoku grid in a console screen. 
 // Mainly used for debugging purposes 
@@ -332,7 +279,7 @@ bool Board::IsNumberinSubGrid(int number, int xgrid, int ygrid)
 // to explore
 void Board::HiddenSingles()
 {
-    for (int i = 0; i < possible_numbers.size(); i++)
+    for (int i = 0; i < (unsigned)possible_numbers.size(); i++)
     {
         int checkednumber = possible_numbers.at(i);
         for (int xgrid = 0; xgrid < board_length ; xgrid += 3)

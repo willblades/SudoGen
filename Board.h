@@ -7,12 +7,19 @@
 // intializing method included for possible future use. 
 //======================================================================
 
+#ifndef BOARD_H_
+#define BOARD_H_
+
 #include <vector>
 #include <string>
 #include <map>
+#include <iostream>
+#include <algorithm>
+//#include <random>
+//#include <chrono>
+#include <QTime>
+#include <set>
 
-#ifndef BOARD_H_
-#define BOARD_H_
 
 // an enum for storing pre-defined, user-selectable levels of 
 // difficulty
@@ -30,7 +37,6 @@ public:
     Board(int length);
     ~Board();
     void Initialize();
-    void InitiateRandomFromScratch(); // depricated
     void GeneratePuzzle();
     void DisplayInConsole();
     void SolveGeneratedPuzzle();
