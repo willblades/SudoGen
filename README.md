@@ -13,15 +13,13 @@ To-Do list:
 
 - Implement a way to guarantee solvable problem
 
-- Fix puzzle random generator (it stays fixed most of the time)
-
 - Alternative Problem solving techniques, heuristic and otherwise
 
 - Time & Mistakes tracking 
 
 - Program settings
 
-- Background music
+- Background music (maybe)
 
 Version History: 
 ----------------
