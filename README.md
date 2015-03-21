@@ -26,6 +26,12 @@ To-Do list:
 Version History: 
 ----------------
 
+March 21 2015
+- Version 0.3
+- Fixed misc bugs - user input and random number generation now work as intended 
+- Sudoku Solver implemented - single elimination works now (partially solves the 
+- puzzle)
+
 March 19 2015
 - Version 0.2
 - GUI functionality mostly implemented
