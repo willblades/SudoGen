@@ -11,6 +11,8 @@ to be added.
 To-Do list:
 -----------
 
+- Add a method for user pre-defined puzzle input (through GUI, file or otherwise)
+- 
 - Implement a way to guarantee solvable problem
 
 - Alternative Problem solving techniques, heuristic and otherwise
