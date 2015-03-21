@@ -125,12 +125,22 @@ void MainWindow::On_Clicked(int location)
     if (ok && !text.isEmpty())
         user_answer =  text.toInt();
     if ( user_answer == solution[x][y])
+    {
         allbuttons.at(location)->setText(QString::number(user_answer));
+        board->FindandEraseEmptySpace(x,y);
+    }
     else if (ok && user_answer != solution[x][y] )
     {
         QMessageBox wronganswer_message;
         wronganswer_message.setText("Wrong Answer!");
         wronganswer_message.exec();
+    }
+
+    if (board->isPuzzleSolved())
+    {
+        QMessageBox congratulations;
+        congratulations.setText("Congratulations! Puzzle solved!");
+        congratulations.exec();
     }
 }
 

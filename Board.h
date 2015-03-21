@@ -43,9 +43,10 @@ public:
     std::vector<std::vector<int> > getBoard() { return board; }
     std::vector<std::vector<int> > getSolution() { return solution; }
     int getBoardlength() { return board_length; }
+    bool isPuzzleSolved();
+    void FindandEraseEmptySpace(int key, int value);
 protected:
     void Startup();
-    void FindandEraseEmptySpace(int key, int value);
     bool IsNumberinSubGrid(int number, int xgrid, int ygrid);
     void HiddenSingles();
 private:

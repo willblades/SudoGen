@@ -231,6 +231,16 @@ void Board::SolveGeneratedPuzzle()
         HiddenSingles();
 }
 
+// Determine if the current Sudoku puzzle has been solved
+// by looking at the number of present empty cells
+bool Board::isPuzzleSolved()
+{
+    if (emptyspaces.size() == 0)
+        return true;
+    else
+        return false;
+}
+
 // Helper function for HiddenSpaces()
 // Since the multimap of emptyspaces contain values of similar keys,
 // We need to explicitly look for a matching pair (as opposed to a single
