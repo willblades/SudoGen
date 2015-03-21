@@ -18,11 +18,12 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    // Assign a signalmapper to handle all the button signals
+    // Assign a signalmapper to handle all the button and menu action signals
     signalMapper = new QSignalMapper(this);
     connect(signalMapper, SIGNAL(mapped(int)), this, SLOT(On_Clicked(int)));
     connect(ui->actionExit, SIGNAL(triggered()), this, SLOT(close()));
     connect(ui->actionNew_Game, SIGNAL(triggered()), this, SLOT(NewGame()));
+    connect(ui->actionSolve_it, SIGNAL(triggered()), this, SLOT(Solver()));
     connect(ui->actionAbout, SIGNAL(triggered()), this, SLOT(About()));
 
     int counter = 0;
@@ -50,8 +51,8 @@ void MainWindow::About()
 {
     QMessageBox msgBox;
     msgBox.setWindowTitle("About");
-    msgBox.setText("SuDoGen v0.2 \nA simple sudoku generator \nAuthor: "
-                   "Will Blades \nBuild: Mar 19 2014");
+    msgBox.setText("SuDoGen v0.3 \nA simple sudoku generator \nAuthor: "
+                   "Will Blades \nBuild: Mar 21 2014");
     msgBox.setStandardButtons(QMessageBox::Ok);
     msgBox.exec();
 }
@@ -66,6 +67,13 @@ void MainWindow::InitiateWindow()
     board = new Board();
     board->Initialize();
     board->GeneratePuzzle();
+    PopulateWindow();
+}
+
+// Refreshs the contents of the cells with the current contents of the board
+// Used in both initialization and Puzzle solver.
+void MainWindow::PopulateWindow()
+{
     std::vector<std::vector<int> > puzzle = board->getBoard();
 
     int counter = 0;
@@ -75,6 +83,7 @@ void MainWindow::InitiateWindow()
     {
         QString buttonname = "pushButton_" +  QString::number(counter);
         button->setObjectName(buttonname);
+        button->setText(" ");
         if (colorcount%2 == 0)
             button->setStyleSheet("background-color: teal");
         else
@@ -142,6 +151,13 @@ void MainWindow::On_Clicked(int location)
         congratulations.setText("Congratulations! Puzzle solved!");
         congratulations.exec();
     }
+}
+
+// Calls the Sudoku solver function
+void MainWindow::Solver()
+{
+    board->SolveGeneratedPuzzle();
+    PopulateWindow();
 }
 
 // default destructor 

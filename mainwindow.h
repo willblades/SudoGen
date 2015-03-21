@@ -31,9 +31,11 @@ public:
 private slots:
     void About();
     void NewGame();
+    void Solver();
     void DestroyWindow();
     void On_Clicked(int location);
 private:
+    void PopulateWindow();
     Ui::MainWindow *ui;
     Board* board;
     QSignalMapper *signalMapper;
