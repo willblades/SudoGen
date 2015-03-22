@@ -41,6 +41,7 @@ Board::Board(difficulty diff, int length)
 // @param length length of the custom grid
 Board::Board(int length)
 {
+	difficulty_settings = easy;
     board_length = length;
     Startup();
 }
@@ -235,7 +236,7 @@ void Board::SolveGeneratedPuzzle()
 // by looking at the number of present empty cells
 bool Board::isPuzzleSolved()
 {
-    if (emptyspaces.size() == 0)
+    if (emptyspaces.empty())
         return true;
     else
         return false;
@@ -253,7 +254,7 @@ void Board::FindandEraseEmptySpace(int key, int value)
     std::pair<mapiter, mapiter> pairiter = emptyspaces.equal_range(key);
 
     mapiter iterator = pairiter.first;
-    for (; iterator != pairiter.second; iterator++)
+    for (; iterator != pairiter.second; ++iterator)
     {
         if (iterator->second == value)
         {
@@ -339,10 +340,10 @@ void Board::HiddenSingles()
                         int temploc[2] = { -1, -1 };
                         std::set<int>::iterator rowiter, coliter;
                         for (rowiter = possiblerow_locations.begin(); rowiter !=
-                            possiblerow_locations.end(); rowiter++)
+                            possiblerow_locations.end(); ++rowiter)
                         {
                             for (coliter = possiblecol_locations.begin(); coliter !=
-                                possiblecol_locations.end(); coliter++)
+                                possiblecol_locations.end(); ++coliter)
                             {
                                 int checkingx = *rowiter;
                                 int checkingy = *coliter;

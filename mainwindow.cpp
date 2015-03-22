@@ -127,7 +127,7 @@ void MainWindow::On_Clicked(int location)
     int y = location % board->getBoardlength();
     std::vector<std::vector<int> > solution = board->getSolution();
     bool ok;
-    int user_answer;
+    int user_answer = -1;
     QString text = QInputDialog::getText(this, tr("Enter Your Answer"),
                    tr("Choose a number from 1-9"), QLineEdit::Normal,
                       QDir::home().dirName(), &ok);
@@ -163,6 +163,7 @@ void MainWindow::Solver()
 // default destructor 
 MainWindow::~MainWindow()
 {
+	delete board;
     delete ui;
 }
 
