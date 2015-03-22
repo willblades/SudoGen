@@ -3,7 +3,8 @@ Sudoku Generator &amp; Solver written in C++ and Qt.
 The basic idea behind the program is to randomly generate a solvable Sudoku puzzle
 where either the user or the program attempts to solves it. Program solving techniques
 as of current are restricted to tradtional sudoku solving techniques (finding matching
-pairs, backward elimination, etc.) though heuristic techniques such as GA are planned
+pairs, backward elimination, etc.) though alternative techniques such as heuristics and 
+k-SAT (http://www.nature.com/srep/2012/121011/srep00725/full/srep00725.html) are planned
 to be added. 
 
 ![readme picture](https://cloud.githubusercontent.com/assets/8493854/6734932/ba9ddaca-ce39-11e4-9345-63b46c1d3e90.JPG)
